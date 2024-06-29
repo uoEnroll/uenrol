@@ -64,25 +64,27 @@ export default function Calendar() {
     />
   );
 }
-function CalendarItem({ event }) {
+function CalendarItem(eventInfo: any) {
   return (
     <div className="flex flex-col gap-1 p-2 text-sm truncate">
       <p className="text-gray-100 font-light text-xs">
-        {`${event.start.getHours()}:${event.start.getMinutes().toString().padStart(2, "0")}`}
+        {`${eventInfo.event.start.getHours()}:${eventInfo.event.start.getMinutes().toString().padStart(2, "0")}`}
         {" - "}
-        {`${event.end.getHours()}:${event.end.getMinutes().toString().padStart(2, "0")}`}
+        {`${eventInfo.event.end.getHours()}:${eventInfo.event.end.getMinutes().toString().padStart(2, "0")}`}
       </p>
 
       <div className="text-base">
-        <span className="font-bold">{event.extendedProps.courseCode}</span>
+        <span className="font-bold">
+          {eventInfo.event.extendedProps.courseCode}
+        </span>
         {" - "}
-        <span>{event.extendedProps.type}</span>{" "}
-        <span>{event.extendedProps.subSection}</span>
-        <p>{event.extendedProps.courseTitle}</p>
+        <span>{eventInfo.event.extendedProps.type}</span>{" "}
+        <span>{eventInfo.event.extendedProps.subSection}</span>
+        <p>{eventInfo.event.extendedProps.courseTitle}</p>
       </div>
 
       <div>
-        <p className="italic">{event.extendedProps.instructor}</p>
+        <p className="italic">{eventInfo.event.extendedProps.instructor}</p>
       </div>
     </div>
   );
