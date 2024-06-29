@@ -55,7 +55,7 @@ export default function SearchBar() {
         <input
           value={query}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            setQuery(event.target.value)
+            setQuery(event.target.value.toUpperCase())
           }
           className="border-slate-400 bg-slate-100 border text-xs w-full px-4 py-2 rounded-sm"
           type="text"
