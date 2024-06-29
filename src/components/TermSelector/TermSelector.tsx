@@ -21,13 +21,13 @@ export default function TermSelector() {
       return data.data as Term[];
     },
   });
-  const { term, setTerm } = useCourses();
+  const { term, changeTerm } = useCourses();
 
   React.useEffect(() => {
     if (data && data.length > 0 && !term) {
-      setTerm(data[0]);
+      changeTerm(data[0]);
     }
-  }, [data, setTerm, term]);
+  }, [changeTerm, data, term]);
 
   if (isLoading) return <div>Loading Available Terms...</div>;
   if (isError)
@@ -35,7 +35,7 @@ export default function TermSelector() {
 
   function handleSelect(event: ChangeEvent<HTMLSelectElement>) {
     const term = JSON.parse(event.target.value) as Term;
-    setTerm(term);
+    changeTerm(term);
   }
 
   return (
