@@ -3,3 +3,8 @@ export interface Course {
   courseTitle: string;
   term: string;
 }
+
+export interface Term {
+  term: string;
+  value: string;
+}

@@ -1,10 +1,10 @@
-import { Course } from "@/types/Course";
+import { Course, Term } from "@/types/Course";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface CoursesContextType {
   courses: Course[];
-  term: string;
-  setTerm: React.Dispatch<React.SetStateAction<string>>;
+  term: Term | null;
+  setTerm: React.Dispatch<React.SetStateAction<Term | null>>;
   addCourse: (course: Course) => void;
 }
 
@@ -14,7 +14,7 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [courses, setCourses] = useState<Course[]>([]);
-  const [term, setTerm] = useState<string>("");
+  const [term, setTerm] = useState<Term | null>(null);
 
   function addCourse(course: Course) {
     setCourses((currCourses) => {
