@@ -37,6 +37,7 @@ export default function SearchBar() {
   React.useEffect(() => {
     if (isSuccess) {
       addCourse(data);
+      setQuery("");
     }
   }, [addCourse, data, isSuccess]);
 
