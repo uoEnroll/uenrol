@@ -17,8 +17,29 @@ export default function Calendar() {
 
   return (
     <FullCalendar
-      allDaySlot={false}
       plugins={[timeGridPlugin, momentPlugin]}
+      headerToolbar={{
+        left: "today,timeGridDay,timeGridFiveDay,timeGridWeek",
+        center: "title",
+        right: "prev,next",
+      }}
+      views={{
+        today: {
+          buttonText: "Today",
+        },
+        timeGridDay: {
+          buttonText: "Day",
+        },
+        timeGridFiveDay: {
+          type: "timeGrid",
+          duration: { days: 5 },
+          dateAlignment: "week",
+          buttonText: "5-day",
+        },
+        timeGridWeek: {
+          buttonText: "7-day",
+        },
+      }}
       initialView={
         initialWidth <= MOBILE_BREAKPOINT
           ? "timeGridDay"
@@ -26,24 +47,13 @@ export default function Calendar() {
             ? "timeGridFiveDay"
             : "timeGridWeek"
       }
-      headerToolbar={{
-        left: "today,timeGridDay,timeGridWeek",
-        center: "title",
-        right: "prev,next",
-      }}
+      firstDay={1}
+      allDaySlot={false}
       height={"100%"}
       slotDuration={"00:15:00"}
       slotMinTime={"07:00:00"}
       slotMaxTime={"23:00:00"}
       slotLabelInterval={"01:00:00"}
-      firstDay={1}
-      views={{
-        timeGridFiveDay: {
-          type: "timeGrid",
-          duration: { days: 5 },
-          dateAlignment: "week",
-        },
-      }}
       windowResize={(info) => {
         const width = window.innerWidth;
         if (width <= MOBILE_BREAKPOINT) {
