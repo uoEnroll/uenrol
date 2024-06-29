@@ -20,6 +20,7 @@ export default function Calendar() {
       plugins={[timeGridPlugin, momentPlugin]}
       headerToolbar={{
         left: "today,timeGridDay,timeGridFiveDay,timeGridWeek",
+        left: "timeGridDay,timeGridFiveDay,timeGridWeek",
         center: "title",
         right: "prev,next",
       }}

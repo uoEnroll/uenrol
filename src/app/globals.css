@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.fc-button-primary {
+  @apply bg-red-700 border-none text-xs rounded-sm !important;
+}
+
+.fc-button-active {
+  @apply bg-red-900 !important;
+}
+
+.fc-day-today {
+  @apply bg-transparent !important;
+}
+
+.fc-button-group {
+  @apply flex gap-1 !important;
+}
+
+.fc-toolbar-title {
+  @apply text-base font-bold !important;
+}
+
+.fc-col-header-cell-cushion {
+  @apply text-xs !important;
+}
+
+.fc-timegrid-slot-minor {
+  @apply border-none !important;
+}
+
+.fc-timegrid-slot-label-cushion {
+  @apply text-xs !important;
+}
