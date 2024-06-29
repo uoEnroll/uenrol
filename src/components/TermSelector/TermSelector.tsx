@@ -1,7 +1,7 @@
 "use client";
 
 import { useCourses } from "@/contexts/CourseContext";
-import { Term } from "@/types/Course";
+import { Term } from "@/types/Types";
 import { useQuery } from "@tanstack/react-query";
 import React, { ChangeEvent } from "react";
 

@@ -1,4 +1,4 @@
-import { Course, Term } from "@/types/Course";
+import { Course, Term } from "@/types/Types";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface CoursesContextType {

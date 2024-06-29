@@ -1,5 +1,5 @@
 import { useCourses } from "@/contexts/CourseContext";
-import { Course, Term } from "@/types/Course";
+import { Course, Term } from "@/types/Types";
 import { useQuery } from "@tanstack/react-query";
 import React, { ChangeEvent, useState } from "react";
 import TermSelector from "../TermSelector/TermSelector";

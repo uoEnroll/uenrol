@@ -1,4 +1,4 @@
-import { Course } from "@/types/Course";
+import { Course } from "@/types/Types";
 import Image from "next/image";
 import { useState } from "react";
 
