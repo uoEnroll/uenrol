@@ -41,6 +41,7 @@ export default function Calendar() {
         timeGridFiveDay: {
           type: "timeGrid",
           duration: { days: 5 },
+          dateAlignment: "week",
         },
       }}
       windowResize={(info) => {
