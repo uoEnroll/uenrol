@@ -3,6 +3,8 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface CoursesContextType {
   courses: Course[];
+  term: string;
+  setTerm: React.Dispatch<React.SetStateAction<string>>;
   addCourse: (course: Course) => void;
 }
 
@@ -12,6 +14,7 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [courses, setCourses] = useState<Course[]>([]);
+  const [term, setTerm] = useState<string>("");
 
   function addCourse(course: Course) {
     setCourses((currCourses) => {
@@ -28,7 +31,7 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
   }
 
   return (
-    <CoursesContext.Provider value={{ courses, addCourse }}>
+    <CoursesContext.Provider value={{ courses, addCourse, term, setTerm }}>
       {children}
     </CoursesContext.Provider>
   );
