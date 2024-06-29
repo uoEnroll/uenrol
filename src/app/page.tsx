@@ -6,21 +6,24 @@ import Main from "@/layouts/Main/Main";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import Sidebar from "@/layouts/Sidebar/Sidebar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { CoursesProvider } from "@/contexts/CourseContext";
 
 export default function Page() {
   const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <App>
-        <Main>
-          <Calendar />
-        </Main>
+      <CoursesProvider>
+        <App>
+          <Main>
+            <Calendar />
+          </Main>
 
-        <Sidebar>
-          <SearchBar />
-        </Sidebar>
-      </App>
+          <Sidebar>
+            <SearchBar />
+          </Sidebar>
+        </App>
+      </CoursesProvider>
     </QueryClientProvider>
   );
 }
