@@ -1,11 +1,18 @@
 import { useCourses } from "@/contexts/CourseContext";
-import { Course } from "@/types/Course";
+import { Course, Term } from "@/types/Course";
 import { useQuery } from "@tanstack/react-query";
 import React, { ChangeEvent, useState } from "react";
 import TermSelector from "../TermSelector/TermSelector";
 
-async function fetchCourses(courseCode: string) {
-  const res = await fetch(`/api/v1/terms/2024 Fall Term/courses/${courseCode}`);
+async function fetchCourses(courseCode: string, term: Term | null) {
+  if (!term) {
+    throw new Error("No Term Selected");
+  }
+  const selectedTerm = term.term.replace("/", "%2F");
+
+  const res = await fetch(
+    `/api/v1/terms/${selectedTerm}/courses/${courseCode}`,
+  );
 
   if (!res.ok) {
     throw new Error("Something went wrong");
@@ -19,10 +26,11 @@ async function fetchCourses(courseCode: string) {
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");
+  const { term } = useCourses();
   const { courses, addCourse } = useCourses();
   const { data, error, isLoading, isSuccess, refetch } = useQuery<Course>({
-    queryKey: ["courses", query],
-    queryFn: () => fetchCourses(query),
+    queryKey: ["courses", query, term],
+    queryFn: () => fetchCourses(query, term),
     enabled: false,
   });
 
