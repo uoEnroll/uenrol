@@ -1,5 +1,9 @@
-import Image from "next/image";
+import Calendar from "@/components/Calendar";
 
-export default function Home() {
-  return <h1>Hello</h1>;
+export default function Page() {
+  return (
+    <div className="h-dvh">
+      <Calendar />
+    </div>
+  );
 }
