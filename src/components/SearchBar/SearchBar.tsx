@@ -2,6 +2,7 @@ import { useCourses } from "@/contexts/CourseContext";
 import { Course } from "@/types/Course";
 import { useQuery } from "@tanstack/react-query";
 import React, { ChangeEvent, useState } from "react";
+import TermSelector from "../TermSelector/TermSelector";
 
 async function fetchCourses(courseCode: string) {
   const res = await fetch(`/api/v1/terms/2024 Fall Term/courses/${courseCode}`);
@@ -39,22 +40,25 @@ export default function SearchBar() {
   }
 
   return (
-    <div className="flex items-center justify-between gap-2">
-      <input
-        value={query}
-        onChange={(event: ChangeEvent<HTMLInputElement>) =>
-          setQuery(event.target.value)
-        }
-        className="border-slate-400 bg-slate-100 border text-xs w-full px-4 py-2 rounded-sm"
-        type="text"
-        placeholder="Course Code Eg. CSI 2101"
-      />
-      <button
-        onClick={handleSearchClick}
-        className="w-min bg-red-700 px-4 h-full py-2 rounded-sm text-white"
-      >
-        Search
-      </button>
+    <div className="flex flex-col gap-2">
+      <TermSelector />
+      <div className="flex items-center justify-between gap-2">
+        <input
+          value={query}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            setQuery(event.target.value)
+          }
+          className="border-slate-400 bg-slate-100 border text-xs w-full px-4 py-2 rounded-sm"
+          type="text"
+          placeholder="Course Code Eg. CSI 2101"
+        />
+        <button
+          onClick={handleSearchClick}
+          className="w-min bg-red-700 px-4 h-full py-2 rounded-sm text-white"
+        >
+          Search
+        </button>
+      </div>
     </div>
   );
 }
