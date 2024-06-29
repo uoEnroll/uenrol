@@ -18,7 +18,7 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
       if (
         currCourses.some(
           (elem) =>
-            elem.courseCode === course.courseCode || elem.term === course.term,
+            elem.courseCode === course.courseCode && elem.term === course.term,
         )
       ) {
         return currCourses;

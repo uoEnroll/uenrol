@@ -1,10 +1,10 @@
 import { useCourses } from "@/contexts/CourseContext";
 import { Course } from "@/types/Course";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 
-async function fetchCourses() {
-  const res = await fetch("/api/v1/terms/2024 Fall Term/courses/ADM1100");
+async function fetchCourses(courseCode: string) {
+  const res = await fetch(`/api/v1/terms/2024 Fall Term/courses/${courseCode}`);
 
   if (!res.ok) {
     throw new Error("Something went wrong");
@@ -17,10 +17,11 @@ async function fetchCourses() {
 }
 
 export default function SearchBar() {
+  const [query, setQuery] = useState("");
   const { courses, addCourse } = useCourses();
   const { data, error, isLoading, isSuccess, refetch } = useQuery<Course>({
-    queryKey: ["courses"],
-    queryFn: fetchCourses,
+    queryKey: ["courses", query],
+    queryFn: () => fetchCourses(query),
     enabled: false,
   });
 
@@ -40,6 +41,10 @@ export default function SearchBar() {
   return (
     <div className="flex items-center justify-between gap-2">
       <input
+        value={query}
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          setQuery(event.target.value)
+        }
         className="border-slate-400 bg-slate-100 border text-xs w-full px-4 py-2 rounded-sm"
         type="text"
         placeholder="Course Code Eg. CSI 2101"
