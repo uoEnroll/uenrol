@@ -24,21 +24,17 @@ export default function Calendar() {
         right: "prev,next",
       }}
       views={{
-        today: {
-          buttonText: "Today",
-        },
-        timeGridDay: {
-          buttonText: "Day",
-        },
         timeGridFiveDay: {
           type: "timeGrid",
           duration: { days: 5 },
           dateAlignment: "week",
-          buttonText: "5-day",
         },
-        timeGridWeek: {
-          buttonText: "7-day",
-        },
+      }}
+      buttonText={{
+        today: "Today",
+        timeGridDay: "Day",
+        timeGridFiveDay: "5-Day",
+        timeGridWeek: "7-Day",
       }}
       initialView={
         initialWidth <= MOBILE_BREAKPOINT
