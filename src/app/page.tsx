@@ -1,4 +1,8 @@
+"use client";
+
 import Calendar from "@/components/Calendar/Calendar";
+import Main from "@/components/Main/Main";
+import Sidebar from "@/components/Sidebar/Sidebar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function Page() {
@@ -7,11 +11,11 @@ export default function Page() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex flex-col justify-between text-xs h-dvh w-dvw bg-black">
-        <div className="p-2 h-[52%] rounded-b-md bg-white">
+        <Main>
           <Calendar />
-        </div>
+        </Main>
 
-        <div className="h-[40%] p-4 bg-white w-full rounded-t-md">
+        <Sidebar>
           <div className="flex items-center justify-between gap-2">
             <input
               className="border-slate-400 bg-slate-100 border text-xs w-full px-4 py-2 rounded-sm"
@@ -22,7 +26,7 @@ export default function Page() {
               Search
             </button>
           </div>
-        </div>
+        </Sidebar>
       </div>
     </QueryClientProvider>
   );
