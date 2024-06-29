@@ -26,6 +26,7 @@ export default function Calendar() {
       slotMinTime={"07:00:00"}
       slotMaxTime={"23:00:00"}
       slotLabelInterval={"01:00:00"}
+      firstDay={1}
       windowResize={(info) => {
         const width = window.innerWidth;
         if (width <= 768) {
