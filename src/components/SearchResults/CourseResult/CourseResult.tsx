@@ -10,10 +10,7 @@ const CourseResult: React.FC<CourseResultProps> = ({ course }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div
-      key={`${course.courseCode}${course.term}`}
-      className="p-2 rounded-sm bg-red-500"
-    >
+    <div className="p-2 rounded-sm bg-red-500">
       <div className="flex items-center justify-between">
         <div className="truncate">
           <span>{`${course.courseCode}: ${course.courseTitle}`}</span>
