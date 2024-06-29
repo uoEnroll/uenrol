@@ -1,4 +1,42 @@
+import { useCourses } from "@/contexts/CourseContext";
+import { Course } from "@/types/Course";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
+
+async function fetchCourses() {
+  const res = await fetch("/api/v1/terms/2024 Fall Term/courses/ADM1100");
+
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+  const data = await res.json();
+  if (data.error) {
+    throw new Error(data.error);
+  }
+  return data.data;
+}
+
 export default function SearchBar() {
+  const { courses, addCourse } = useCourses();
+  const { data, error, isLoading, isSuccess, refetch } = useQuery<Course>({
+    queryKey: ["courses"],
+    queryFn: fetchCourses,
+    enabled: false,
+  });
+
+  React.useEffect(() => {
+    if (isSuccess) {
+      addCourse(data);
+    }
+  }, [addCourse, data, isSuccess]);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>An error occurred: {error.message}</div>;
+
+  function handleSearchClick() {
+    refetch();
+  }
+
   return (
     <div className="flex items-center justify-between gap-2">
       <input
@@ -6,7 +44,10 @@ export default function SearchBar() {
         type="text"
         placeholder="Course Code Eg. CSI 2101"
       />
-      <button className="w-min bg-red-700 px-4 h-full py-2 rounded-sm text-white">
+      <button
+        onClick={handleSearchClick}
+        className="w-min bg-red-700 px-4 h-full py-2 rounded-sm text-white"
+      >
         Search
       </button>
     </div>
