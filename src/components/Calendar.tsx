@@ -60,6 +60,30 @@ export default function Calendar() {
           info.view.calendar.changeView("timeGridWeek");
         }
       }}
+      eventContent={CalendarItem}
     />
+  );
+}
+function CalendarItem({ event }) {
+  return (
+    <div className="flex flex-col gap-1 p-2 text-sm truncate">
+      <p className="text-gray-100 font-light text-xs">
+        {`${event.start.getHours()}:${event.start.getMinutes().toString().padStart(2, "0")}`}
+        {" - "}
+        {`${event.end.getHours()}:${event.end.getMinutes().toString().padStart(2, "0")}`}
+      </p>
+
+      <div className="text-base">
+        <span className="font-bold">{event.extendedProps.courseCode}</span>
+        {" - "}
+        <span>{event.extendedProps.type}</span>{" "}
+        <span>{event.extendedProps.subSection}</span>
+        <p>{event.extendedProps.courseTitle}</p>
+      </div>
+
+      <div>
+        <p className="italic">{event.extendedProps.instructor}</p>
+      </div>
+    </div>
   );
 }
