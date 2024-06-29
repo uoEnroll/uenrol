@@ -4,6 +4,8 @@ import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import React from "react";
 
+const TABELT_BREAKPOINT = 768;
+const MOBILE_BREAKPOINT = 640;
 export default function Calendar() {
   let initialWidth = 0;
   // NextJS complains that window is undefined even though this is a client component
@@ -15,7 +17,13 @@ export default function Calendar() {
     <FullCalendar
       allDaySlot={false}
       plugins={[timeGridPlugin]}
-      initialView={initialWidth <= 768 ? "timeGridDay" : "timeGridWeek"}
+      initialView={
+        initialWidth <= MOBILE_BREAKPOINT
+          ? "timeGridDay"
+          : initialWidth <= TABELT_BREAKPOINT
+            ? "timeGridFourDay"
+            : "timeGridWeek"
+      }
       headerToolbar={{
         left: "today,timeGridDay,timeGridWeek",
         center: "title",
@@ -27,10 +35,18 @@ export default function Calendar() {
       slotMaxTime={"23:00:00"}
       slotLabelInterval={"01:00:00"}
       firstDay={1}
+      views={{
+        timeGridFourDay: {
+          type: "timeGrid",
+          duration: { days: 4 },
+        },
+      }}
       windowResize={(info) => {
         const width = window.innerWidth;
-        if (width <= 768) {
+        if (width <= MOBILE_BREAKPOINT) {
           info.view.calendar.changeView("timeGridDay");
+        } else if (width <= TABELT_BREAKPOINT) {
+          info.view.calendar.changeView("timeGridFourDay");
         } else {
           info.view.calendar.changeView("timeGridWeek");
         }
