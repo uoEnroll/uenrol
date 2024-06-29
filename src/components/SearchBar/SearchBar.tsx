@@ -49,7 +49,7 @@ export default function SearchBar() {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="sticky p-4 top-0 bg-white z-10 flex flex-col gap-2">
       <TermSelector />
       <div className="flex items-center justify-between gap-2">
         <input

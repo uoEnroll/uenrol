@@ -11,7 +11,7 @@ const CourseResult: React.FC<CourseResultProps> = ({ course }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div>
+    <div className="px-4 pb-4 overflow-y-scroll">
       <div className="p-2 rounded-sm bg-red-500">
         <div className="flex items-center justify-between">
           <div className="truncate">
