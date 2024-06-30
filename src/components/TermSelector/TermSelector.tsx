@@ -4,6 +4,7 @@ import { useCourses } from "@/contexts/CourseContext";
 import { Term } from "@/types/Types";
 import { useQuery } from "@tanstack/react-query";
 import React, { ChangeEvent } from "react";
+import { SkeletonBar } from "../SkeletonBar/SkeletonBar";
 
 export default function TermSelector() {
   const { isLoading, isError, isSuccess, data } = useQuery({
@@ -29,7 +30,6 @@ export default function TermSelector() {
     }
   }, [changeTerm, data, term]);
 
-  if (isLoading) return <div>Loading Available Terms...</div>;
   if (isError)
     return <div>Something went wrong when getting available terms</div>;
 
@@ -39,17 +39,23 @@ export default function TermSelector() {
   }
 
   return (
-    <select
-      value={term ? JSON.stringify(term) : ""}
-      onChange={handleSelect}
-      className="w-full bg-slate-100 border-slate-400 border p-2 rounded-sm"
-    >
-      {isSuccess &&
-        data?.map((elem) => (
-          <option key={elem.value} value={JSON.stringify(elem)}>
-            {elem.term}
-          </option>
-        ))}
-    </select>
+    <>
+      {isLoading ? (
+        <SkeletonBar />
+      ) : (
+        <select
+          value={term ? JSON.stringify(term) : ""}
+          onChange={handleSelect}
+          className="w-full bg-slate-100 border-slate-400 border p-2 rounded-sm"
+        >
+          {isSuccess &&
+            data?.map((elem) => (
+              <option key={elem.value} value={JSON.stringify(elem)}>
+                {elem.term}
+              </option>
+            ))}
+        </select>
+      )}
+    </>
   );
 }
