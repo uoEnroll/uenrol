@@ -50,12 +50,12 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
   ]);
 
   return (
-    <div className="flex items-center justify-between h-full w-full">
+    <div className="flex items-center justify-between h-full w-full border-b">
       <div className="px-2 h-full flex items-stretch">
         <input onChange={handleToggle} checked={isSelected} type="checkbox" />
       </div>
 
-      <div className="w-full ml-4 overflow-hidden">
+      <div className="w-full ml-4 overflow-hidden flex flex-col gap-2">
         {component.sessions.map((session) => (
           <SessionResult
             key={`${courseCode}${term}${section}${subSection}${session.dayOfWeek}${session.startTime}`}
@@ -64,7 +64,7 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
         ))}
       </div>
 
-      <div className="flex flex-col items-center uppercase border-l-slate-400 border-l p-6">
+      <div className="flex w-1/3 h-full flex-col items-center uppercase border-l-slate-400 border-l p-6">
         <span
           className={`font-bold text-base ${component.isOpen ? "text-lime-600" : "text-red-800"}`}
         >
