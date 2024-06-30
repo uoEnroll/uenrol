@@ -19,14 +19,15 @@ export const SectionResult: React.FC<SectionResultProps> = ({
 
   return (
     <div>
-      <div className="flex justify-between items-center w-full p-2 bg-slate-200">
+      <div
+        onClick={() => setIsOpen((is) => !is)}
+        className="flex hover:cursor-pointer justify-between z-20 items-center w-full p-2 bg-slate-200"
+      >
         <span>Section {section.section}</span>
-        <button onClick={() => setIsOpen((is) => !is)}>
-          <FontAwesomeIcon
-            className={`transition-all ease-in delay-100 ${isOpen ? "-rotate-90" : "rotate-0"}`}
-            icon={faChevronLeft}
-          />
-        </button>
+        <FontAwesomeIcon
+          className={`transition-all ease-in delay-100 ${isOpen ? "-rotate-90" : "rotate-0"}`}
+          icon={faChevronLeft}
+        />
       </div>
 
       {section.components.map((component) => {

@@ -15,24 +15,25 @@ const CourseResult: React.FC<CourseResultProps> = ({ course }) => {
   return (
     <div className="px-4 pb-4">
       <div className="border rounded-md overflow-hidden">
-        <div className="p-2 bg-red-500">
+        <div
+          onClick={() => setIsOpen((is) => !is)}
+          className="hover:cursor-pointer p-2 bg-red-500"
+        >
           <div className="flex items-center justify-between">
             <div className="truncate">
               <span>{`${course.courseCode}: ${course.courseTitle}`}</span>
             </div>
 
-            <button onClick={() => setIsOpen((is) => !is)}>
-              <FontAwesomeIcon
-                className={`transition-all ease-in delay-100 ${isOpen ? "-rotate-90" : "rotate-0"}`}
-                icon={faChevronLeft}
-              />
-            </button>
+            <FontAwesomeIcon
+              className={`transition-all ease-in delay-100 ${isOpen ? "-rotate-90" : "rotate-0"}`}
+              icon={faChevronLeft}
+            />
           </div>
         </div>
         {course.sections.map((section) => {
           return (
             <div
-              className={`transition-all ease-in delay-100 ${isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"}`}
+              className={`overflow-hidden transition-all ease-in delay-100 ${isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"}`}
               key={`${course.courseCode}${course.term}${section.section}`}
             >
               <SectionResult
