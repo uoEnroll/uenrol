@@ -1,7 +1,7 @@
 import { useCourses } from "@/contexts/CourseContext";
 import { Course, Term } from "@/types/Types";
 import { useQuery } from "@tanstack/react-query";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useCallback, useState } from "react";
 import TermSelector from "../TermSelector/TermSelector";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -54,17 +54,15 @@ export default function SearchBar() {
     if (isSuccess) {
       addCourse(data);
       setQuery("");
+    } else if (error) {
+      toast.error(error.message);
     }
-  }, [addCourse, data, isSuccess]);
+  }, [addCourse, data, isSuccess, error]);
 
-  if (error) {
-    toast.error(error.message);
-  }
-
-  function handleSearchClick() {
+  const handleSearchClick = useCallback(() => {
     if (query.length === 0) return;
     refetch();
-  }
+  }, [query, refetch]);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Enter") {
