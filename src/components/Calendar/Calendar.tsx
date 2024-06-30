@@ -75,23 +75,22 @@ interface CalendarItemProps {
 }
 function CalendarItem(eventInfo: CalendarItemProps) {
   return (
-    <div className="flex flex-col gap-1 p-2 text-sm">
-      <p className="text-gray-100 font-light text-xs truncate">
-        {eventInfo.timeText}
-      </p>
-
-      <div className="text-base truncate">
+    <div className="flex flex-col gap-1 p-1 text-sm">
+      <div className="flex flex-wrap truncate">
         <span className="font-bold">
           {eventInfo.event.extendedProps.courseCode}
+          &nbsp;
         </span>
-        {" - "}
-        <span>{eventInfo.event.extendedProps.type}</span>{" "}
-        <span>{eventInfo.event.extendedProps.subSection}</span>
-        <br />
-        <span className="truncate">
-          {eventInfo.event.extendedProps.courseTitle}
+
+        <span>
+          {eventInfo.event.extendedProps.type}
+          {" - "}
+          {eventInfo.event.extendedProps.subSection}
         </span>
       </div>
+      <span className="truncate">
+        {eventInfo.event.extendedProps.courseTitle}
+      </span>
 
       <div>
         <p className="italic truncate">

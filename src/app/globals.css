@@ -33,3 +33,7 @@
 .fc-timegrid-slot-label-cushion {
   @apply text-xs !important;
 }
+
+.fc-event-main {
+  @apply overflow-hidden !important;
+}
