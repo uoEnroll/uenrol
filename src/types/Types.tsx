@@ -12,7 +12,7 @@ export interface Section {
 
 export interface Component {
   type: string;
-  isOpen: string;
+  isOpen: boolean;
   subSection: string;
   sessions: Session[];
 }
@@ -37,8 +37,18 @@ export interface SelectedCourse extends Component {
   subSection: string;
 }
 
-export interface SelectedSession extends Session {
-  courseCode: string;
-  term: string;
-  subSection: string;
+export interface SelectedSession {
+  startTime: string;
+  endTime: string;
+  startRecur: string;
+  endRecur: string;
+  daysOfWeek: number[];
+  extendedProps: {
+    courseCode: string;
+    term: string;
+    subSection: string;
+    instructor: string;
+    type: string;
+    isOpen: boolean;
+  };
 }

@@ -5,6 +5,8 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import momentPlugin from "@fullcalendar/moment";
 import React from "react";
 import moment from "moment";
+import { useCourses } from "@/contexts/CourseContext";
+import { SelectedSession } from "@/types/Types";
 
 const TABELT_BREAKPOINT = 768;
 const MOBILE_BREAKPOINT = 640;
@@ -14,6 +16,7 @@ export default function Calendar() {
   if (typeof window != "undefined") {
     initialWidth = window.innerWidth;
   }
+  const { selectedSessions } = useCourses();
 
   return (
     <FullCalendar
@@ -61,16 +64,20 @@ export default function Calendar() {
         }
       }}
       eventContent={CalendarItem}
+      events={selectedSessions}
     />
   );
 }
-function CalendarItem(eventInfo: any) {
+
+interface CalendarItemProps {
+  event: SelectedSession;
+  timeText: string;
+}
+function CalendarItem(eventInfo: CalendarItemProps) {
   return (
-    <div className="flex flex-col gap-1 p-2 text-sm truncate">
-      <p className="text-gray-100 font-light text-xs">
-        {`${eventInfo.event.start.getHours()}:${eventInfo.event.start.getMinutes().toString().padStart(2, "0")}`}
-        {" - "}
-        {`${eventInfo.event.end.getHours()}:${eventInfo.event.end.getMinutes().toString().padStart(2, "0")}`}
+    <div className="flex flex-col gap-1 p-2 text-sm">
+      <p className="text-gray-100 font-light text-xs truncate">
+        {eventInfo.timeText}
       </p>
 
       <div className="text-base">
@@ -80,11 +87,12 @@ function CalendarItem(eventInfo: any) {
         {" - "}
         <span>{eventInfo.event.extendedProps.type}</span>{" "}
         <span>{eventInfo.event.extendedProps.subSection}</span>
-        <p>{eventInfo.event.extendedProps.courseTitle}</p>
       </div>
 
       <div>
-        <p className="italic">{eventInfo.event.extendedProps.instructor}</p>
+        <p className="italic truncate">
+          {eventInfo.event.extendedProps.instructor}
+        </p>
       </div>
     </div>
   );

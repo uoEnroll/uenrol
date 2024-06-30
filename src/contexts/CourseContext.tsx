@@ -56,21 +56,30 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
       if (
         currSelectedComponents.some(
           (elem) =>
-            elem.courseCode === course.courseCode &&
-            elem.term === course.term &&
-            elem.subSection == course.subSection,
+            elem.extendedProps.courseCode === course.courseCode &&
+            elem.extendedProps.term === course.term &&
+            elem.extendedProps.subSection == course.subSection,
         )
       ) {
         return currSelectedComponents;
       }
       const sessions = course.sessions.map((session) => {
         return {
-          ...session,
-          courseCode: course.courseCode,
-          term: course.term,
-          subSection: course.subSection,
+          startTime: session.startTime,
+          endTime: session.endTime,
+          startRecur: session.startDate,
+          endRecur: session.endDate,
+          daysOfWeek: [0],
+          extendedProps: {
+            courseCode: course.courseCode,
+            term: course.term,
+            subSection: course.subSection,
+            instructor: session.instructor,
+            type: course.type,
+            isOpen: course.isOpen,
+          },
         };
-      });
+      }) as SelectedSession[];
       return [...sessions, ...currSelectedComponents];
     });
   }, []);
@@ -81,9 +90,9 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
         const filtered = currSelectedCourses.filter(
           (course) =>
             !(
-              course.courseCode === courseCode &&
-              course.term === term &&
-              course.subSection === subSection
+              course.extendedProps.courseCode === courseCode &&
+              course.extendedProps.term === term &&
+              course.extendedProps.subSection === subSection
             ),
         );
         return filtered;
