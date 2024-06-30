@@ -65,7 +65,7 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
 
       <div className="flex flex-col items-center uppercase border-l-slate-400 border-l p-6">
         <span
-          className={`font-bold text-base ${!component.isOpen ? "text-lime-600" : "text-red-800"}`}
+          className={`font-bold text-base ${component.isOpen ? "text-lime-600" : "text-red-800"}`}
         >
           {component.subSection}
         </span>
