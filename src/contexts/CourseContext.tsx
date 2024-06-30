@@ -1,15 +1,26 @@
-import { Course, Term } from "@/types/Types";
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import { Course, SelectedCourse, Term } from "@/types/Types";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useMemo,
+  useCallback,
+} from "react";
 
 interface CoursesContextType {
   courses: Course[];
-  selectedCourses: Course[];
+  selectedCourses: SelectedCourse[];
   term: Term | null;
   resetCourses: () => void;
   changeTerm: (term: Term) => void;
   addCourse: (course: Course) => void;
-  addSelectedCourse: (course: Course) => void;
-  removeSelectedCourse: (course: Course) => void;
+  addSelectedCourse: (course: SelectedCourse) => void;
+  removeSelectedCourse: (
+    courseCode: string,
+    term: string,
+    subSection: string,
+  ) => void;
 }
 
 const CoursesContext = createContext<CoursesContextType | undefined>(undefined);
@@ -18,7 +29,7 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [courses, setCourses] = useState<Course[]>([]);
-  const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
+  const [selectedCourses, setSelectedCourses] = useState<SelectedCourse[]>([]);
   const [term, setTerm] = useState<Term | null>(null);
 
   function addCourse(course: Course) {
@@ -39,33 +50,43 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
     setCourses([]);
   }
 
-  function addSelectedCourse(course: Course) {
-    setCourses((currSelectedCourses) => {
+  const addSelectedCourse = useCallback((course: SelectedCourse) => {
+    setSelectedCourses((currSelectedCourses) => {
       if (
         currSelectedCourses.some(
           (elem) =>
-            elem.courseCode === course.courseCode && elem.term === course.term,
+            elem.courseCode === course.courseCode &&
+            elem.term === course.term &&
+            elem.subSection == course.subSection,
         )
       ) {
         return currSelectedCourses;
       }
       return [course, ...currSelectedCourses];
     });
-  }
+  }, []);
 
-  function removeSelectedCourse(course: Course) {
-    setCourses((currSelectedCourses) => {
-      const filtered = currSelectedCourses.filter(
-        (elem) =>
-          elem.courseCode !== course.courseCode && elem.term !== course.term,
-      );
-      return filtered;
-    });
-  }
+  const removeSelectedCourse = useCallback(
+    (courseCode: string, term: string, subSection: string) => {
+      setSelectedCourses((currSelectedCourses) => {
+        const filtered = currSelectedCourses.filter(
+          (course) =>
+            !(
+              course.courseCode === courseCode &&
+              course.term === term &&
+              course.subSection === subSection
+            ),
+        );
+        return filtered;
+      });
+    },
+    [],
+  );
 
   function changeTerm(term: Term) {
     setTerm(term);
     setCourses([]);
+    setSelectedCourses([]);
   }
 
   return (
