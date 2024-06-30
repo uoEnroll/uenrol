@@ -30,3 +30,9 @@ export interface Term {
   term: string;
   value: string;
 }
+
+export interface SelectedCourse extends Component {
+  courseCode: string;
+  term: string;
+  subSection: string;
+}
