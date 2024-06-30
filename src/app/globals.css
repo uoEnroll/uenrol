@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .fc-button-primary {
-  @apply bg-red-700 border-none text-xs rounded-sm !important;
+  @apply bg-red-700 border-none text-xs rounded-sm md:text-base !important;
 }
 
 .fc-button-active {
@@ -19,7 +19,7 @@
 }
 
 .fc-toolbar-title {
-  @apply text-base font-bold !important;
+  @apply text-base font-bold md:text-2xl !important;
 }
 
 .fc-col-header-cell-cushion {

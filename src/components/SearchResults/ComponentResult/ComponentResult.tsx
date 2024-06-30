@@ -42,6 +42,7 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
     isSelected,
     component,
     courseCode,
+    courseTitle,
     subSection,
     term,
     addSelectedComponent,

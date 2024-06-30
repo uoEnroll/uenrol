@@ -20,7 +20,7 @@ export const SectionResult: React.FC<SectionResultProps> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div>
+    <div className="md:text-sm">
       <div
         onClick={() => setIsOpen((is) => !is)}
         className="flex hover:cursor-pointer justify-between z-20 items-center w-full p-2 bg-slate-200"
