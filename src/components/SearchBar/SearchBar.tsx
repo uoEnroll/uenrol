@@ -56,12 +56,19 @@ export default function SearchBar() {
     refetch();
   }
 
+  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "Enter") {
+      handleSearchClick();
+    }
+  }
+
   return (
     <div className="sticky p-4 top-0 bg-white z-10 flex flex-col gap-2">
       <TermSelector />
       <div className="flex items-center justify-between gap-2">
         <input
           value={query}
+          onKeyDown={handleKeyDown}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             setQuery(event.target.value.toUpperCase())
           }
