@@ -49,7 +49,7 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
       <div className="w-full ml-4">
         {component.sessions.map((session) => (
           <SessionResult
-            key={`${courseCode}${term}${section}${subSection}${session.startTime}`}
+            key={`${courseCode}${term}${section}${subSection}${session.dayOfWeek}${session.startTime}`}
             session={session}
           />
         ))}
