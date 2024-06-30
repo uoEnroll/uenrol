@@ -4,11 +4,17 @@ import { SessionResult } from "../SessionResult/SessionResult";
 
 interface ComponentResultProps {
   component: Component;
-  partialKey: string;
+  courseCode: string;
+  term: string;
+  section: string;
+  subSection: string;
 }
 export const ComponentResult: React.FC<ComponentResultProps> = ({
   component,
-  partialKey,
+  courseCode,
+  term,
+  section,
+  subSection,
 }) => {
   return (
     <div className="flex items-center justify-between h-full w-full">
@@ -20,6 +26,7 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
         {component.sessions.map((session) => (
           <SessionResult
             key={`${partialKey}${session.startTime}`}
+            key={`${courseCode}${term}${section}${subSection}${session.startTime}`}
             session={session}
           />
         ))}

@@ -7,11 +7,13 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 interface SectionResultProps {
   section: Section;
-  partialKey: string;
+  courseCode: string;
+  term: string;
 }
 export const SectionResult: React.FC<SectionResultProps> = ({
   section,
-  partialKey,
+  courseCode,
+  term,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -31,9 +33,15 @@ export const SectionResult: React.FC<SectionResultProps> = ({
         return (
           <div
             className={`transition-all ease-in delay-100 ${isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"}`}
-            key={`${partialKey}${section.section}${component.subSection}`}
+            key={`${courseCode}${term}${section.section}${component.subSection}`}
           >
-            <ComponentResult partialKey={partialKey} component={component} />
+            <ComponentResult
+              component={component}
+              courseCode={courseCode}
+              term={term}
+              section={section.section}
+              subSection={component.subSection}
+            />
           </div>
         );
       })}

@@ -36,7 +36,8 @@ const CourseResult: React.FC<CourseResultProps> = ({ course }) => {
               key={`${course.courseCode}${course.term}${section.section}`}
             >
               <SectionResult
-                partialKey={`${course.courseCode}${course.term}`}
+                courseCode={course.courseCode}
+                term={course.term}
                 section={section}
               />
             </div>
