@@ -17,14 +17,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          duration: 3000,
-          className: "w-[90%]",
-        }}
-      />
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 3000,
+            className: "w-[90%]",
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
