@@ -3,6 +3,8 @@ import { Course, Term } from "@/types/Types";
 import { useQuery } from "@tanstack/react-query";
 import React, { ChangeEvent, useState } from "react";
 import TermSelector from "../TermSelector/TermSelector";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 async function fetchCourses(courseCode: string, term: Term | null) {
   if (!term) {
@@ -61,11 +63,19 @@ export default function SearchBar() {
           type="text"
           placeholder="Course Code Eg. CSI 2101"
         />
+
+        <button className="w-min border-slate-400 border p-2 h-full rounded-sm text-black">
+          <FontAwesomeIcon className="h-4 aspect-square" icon={faTrash} />
+        </button>
+
         <button
           onClick={handleSearchClick}
-          className="w-min bg-red-700 px-4 h-full py-2 rounded-sm text-white"
+          className="w-min bg-red-700 p-2 h-full rounded-sm text-white"
         >
-          Search
+          <FontAwesomeIcon
+            className="h-4 aspect-square"
+            icon={faMagnifyingGlass}
+          />
         </button>
       </div>
     </div>
