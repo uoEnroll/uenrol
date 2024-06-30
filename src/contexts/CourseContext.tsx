@@ -4,7 +4,6 @@ import React, {
   useContext,
   useState,
   ReactNode,
-  useMemo,
   useCallback,
 } from "react";
 
@@ -32,7 +31,7 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
   const [selectedCourses, setSelectedCourses] = useState<SelectedCourse[]>([]);
   const [term, setTerm] = useState<Term | null>(null);
 
-  function addCourse(course: Course) {
+  const addCourse = useCallback((course: Course) => {
     setCourses((currCourses) => {
       if (
         currCourses.some(
@@ -44,11 +43,11 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
       }
       return [course, ...currCourses];
     });
-  }
+  }, []);
 
-  function resetCourses() {
+  const resetCourses = useCallback(() => {
     setCourses([]);
-  }
+  }, []);
 
   const addSelectedCourse = useCallback((course: SelectedCourse) => {
     setSelectedCourses((currSelectedCourses) => {
@@ -83,11 +82,11 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
     [],
   );
 
-  function changeTerm(term: Term) {
+  const changeTerm = useCallback((term: Term) => {
     setTerm(term);
     setCourses([]);
     setSelectedCourses([]);
-  }
+  }, []);
 
   return (
     <CoursesContext.Provider
