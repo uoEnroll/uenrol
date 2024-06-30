@@ -2,6 +2,8 @@ import { Course } from "@/types/Types";
 import Image from "next/image";
 import { useState } from "react";
 import { SectionResult } from "../SectionResult/SectionResult";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 interface CourseResultProps {
   course: Course;
@@ -19,12 +21,9 @@ const CourseResult: React.FC<CourseResultProps> = ({ course }) => {
           </div>
 
           <button onClick={() => setIsOpen((is) => !is)}>
-            <Image
-              className={`transition-all ease-in ${isOpen ? "-rotate-90" : "rotate-0"}`}
-              width={24}
-              height={24}
-              src={"/chevron-left.svg"}
-              alt="Expand"
+            <FontAwesomeIcon
+              className={`transition-all ease-in delay-100 ${isOpen ? "-rotate-90" : "rotate-0"}`}
+              icon={faChevronLeft}
             />
           </button>
         </div>
