@@ -17,13 +17,14 @@ async function fetchCourses(courseCode: string, term: Term | null) {
   }
   const selectedTerm = term.term.replace("/", "%2F");
 
+  if (courseCode.length < 7) {
+    throw new Error("Not a valid course code");
+  }
+
   const res = await fetch(
     `/api/v1/terms/${selectedTerm}/courses/${courseCode}`,
   );
 
-  if (!res.ok) {
-    throw new Error("Something went wrong. Please report this error.");
-  }
   const data = await res.json();
   if (data.error) {
     throw new Error(data.error);
@@ -39,6 +40,7 @@ export default function SearchBar() {
     queryKey: ["courses", query, term],
     queryFn: () => fetchCourses(query, term),
     enabled: false,
+    retry: false,
   });
 
   React.useEffect(() => {
@@ -53,6 +55,7 @@ export default function SearchBar() {
   }
 
   function handleSearchClick() {
+    if (query.length === 0) return;
     refetch();
   }
 
