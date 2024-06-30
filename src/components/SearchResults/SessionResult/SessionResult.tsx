@@ -15,10 +15,10 @@ export const SessionResult: React.FC<SessionResultProps> = ({ session }) => {
   return (
     <ul>
       <li>
-        <div className="flex gap-2">
+        <div className="mb-1 flex gap-1 flex-wrap">
           <span className="font-bold">{session.dayOfWeek}</span>
-          <span>{session.instructor}</span>
-          <span className="text-slate-600">{`${startTime} - ${endTime}`}</span>
+          <span className="truncate">{session.instructor}</span>
+          <span className="truncate text-slate-600">{`${startTime} - ${endTime}`}</span>
         </div>
         <span className="truncate text-gray-400">{`${startDate} to ${endDate}`}</span>
       </li>

@@ -54,7 +54,7 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
         <input onChange={handleToggle} checked={isSelected} type="checkbox" />
       </div>
 
-      <div className="w-full ml-4">
+      <div className="w-full ml-4 overflow-hidden">
         {component.sessions.map((session) => (
           <SessionResult
             key={`${courseCode}${term}${section}${subSection}${session.dayOfWeek}${session.startTime}`}
