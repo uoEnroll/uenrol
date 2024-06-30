@@ -14,8 +14,8 @@ interface CoursesContextType {
   resetCourses: () => void;
   changeTerm: (term: Term) => void;
   addCourse: (course: Course) => void;
-  addSelectedCourse: (course: SelectedCourse) => void;
-  removeSelectedCourse: (
+  addSelectedComponent: (course: SelectedCourse) => void;
+  removeSelectedComponent: (
     courseCode: string,
     term: string,
     subSection: string,
@@ -49,7 +49,7 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
     setCourses([]);
   }, []);
 
-  const addSelectedCourse = useCallback((course: SelectedCourse) => {
+  const addSelectedComponent = useCallback((course: SelectedCourse) => {
     setSelectedCourses((currSelectedCourses) => {
       if (
         currSelectedCourses.some(
@@ -65,7 +65,7 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
     });
   }, []);
 
-  const removeSelectedCourse = useCallback(
+  const removeSelectedComponent = useCallback(
     (courseCode: string, term: string, subSection: string) => {
       setSelectedCourses((currSelectedCourses) => {
         const filtered = currSelectedCourses.filter(
@@ -95,8 +95,8 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
         addCourse,
         resetCourses,
         selectedCourses,
-        addSelectedCourse,
-        removeSelectedCourse,
+        addSelectedComponent,
+        removeSelectedComponent,
         term,
         changeTerm,
       }}

@@ -17,7 +17,7 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
   section,
   subSection,
 }) => {
-  const { addSelectedCourse, removeSelectedCourse } = useCourses();
+  const { addSelectedComponent, removeSelectedComponent } = useCourses();
   const [isSelected, setIsSelected] = useState(false);
 
   function handleToggle() {
@@ -26,9 +26,9 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
 
   useEffect(() => {
     if (isSelected) {
-      addSelectedCourse({ ...component, courseCode, term, subSection });
+      addSelectedComponent({ ...component, courseCode, term, subSection });
     } else {
-      removeSelectedCourse(courseCode, term, subSection);
+      removeSelectedComponent(courseCode, term, subSection);
     }
   }, [
     isSelected,
@@ -36,8 +36,8 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
     courseCode,
     subSection,
     term,
-    addSelectedCourse,
-    removeSelectedCourse,
+    addSelectedComponent,
+    removeSelectedComponent,
   ]);
 
   return (
