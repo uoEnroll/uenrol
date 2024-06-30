@@ -58,6 +58,7 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
 
   const resetCourses = useCallback(() => {
     setCourses([]);
+    setSelectedSessions([]);
   }, []);
 
   const addSelectedComponent = useCallback((course: SelectedCourse) => {
