@@ -21,6 +21,13 @@ async function fetchCourses(courseCode: string, term: Term | null) {
     throw new Error("Not a valid course code");
   }
 
+  const containsNumber = (str: string): boolean => /\d/.test(str);
+  const containsLetters = (str: string): boolean => /[a-zA-Z]/.test(str);
+
+  if (!containsNumber(courseCode) || !containsLetters(courseCode)) {
+    throw new Error("Not a valid course code");
+  }
+
   const res = await fetch(
     `/api/v1/terms/${selectedTerm}/courses/${courseCode}`,
   );

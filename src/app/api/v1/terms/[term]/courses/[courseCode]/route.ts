@@ -20,6 +20,13 @@ export async function GET(req: Request, context: any) {
     .replaceAll(/ /g, "")
     .toUpperCase() as string;
 
+  const containsNumber = (str: string): boolean => /\d/.test(str);
+  const containsLetters = (str: string): boolean => /[a-zA-Z]/.test(str);
+
+  if (!containsNumber(courseCodeParam) || !containsLetters(courseCodeParam)) {
+    return Response.json({ error: "Not a valid course code", data: null });
+  }
+
   const res = await supabase.rpc("get_course", {
     termParam,
     courseCodeParam,
