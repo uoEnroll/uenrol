@@ -80,13 +80,17 @@ function CalendarItem(eventInfo: CalendarItemProps) {
         {eventInfo.timeText}
       </p>
 
-      <div className="text-base">
+      <div className="text-base truncate">
         <span className="font-bold">
           {eventInfo.event.extendedProps.courseCode}
         </span>
         {" - "}
         <span>{eventInfo.event.extendedProps.type}</span>{" "}
         <span>{eventInfo.event.extendedProps.subSection}</span>
+        <br />
+        <span className="truncate">
+          {eventInfo.event.extendedProps.courseTitle}
+        </span>
       </div>
 
       <div>

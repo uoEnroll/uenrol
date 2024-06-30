@@ -33,6 +33,7 @@ export interface Term {
 
 export interface SelectedCourse extends Component {
   courseCode: string;
+  courseTitle: string;
   term: string;
   subSection: string;
 }
@@ -45,6 +46,7 @@ export interface SelectedSession {
   daysOfWeek: number[];
   extendedProps: {
     courseCode: string;
+    courseTitle: string;
     term: string;
     subSection: string;
     instructor: string;

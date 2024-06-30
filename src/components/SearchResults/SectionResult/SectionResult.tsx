@@ -8,11 +8,13 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 interface SectionResultProps {
   section: Section;
   courseCode: string;
+  courseTitle: string;
   term: string;
 }
 export const SectionResult: React.FC<SectionResultProps> = ({
   section,
   courseCode,
+  courseTitle,
   term,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,6 +41,7 @@ export const SectionResult: React.FC<SectionResultProps> = ({
             <ComponentResult
               component={component}
               courseCode={courseCode}
+              courseTitle={courseTitle}
               term={term}
               section={section.section}
               subSection={component.subSection}

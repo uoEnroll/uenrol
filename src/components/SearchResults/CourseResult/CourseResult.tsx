@@ -39,6 +39,7 @@ const CourseResult: React.FC<CourseResultProps> = ({ course }) => {
               <SectionResult
                 courseCode={course.courseCode}
                 term={course.term}
+                courseTitle={course.courseTitle}
                 section={section}
               />
             </div>

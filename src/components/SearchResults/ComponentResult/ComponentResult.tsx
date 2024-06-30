@@ -6,6 +6,7 @@ import { useCourses } from "@/contexts/CourseContext";
 interface ComponentResultProps {
   component: Component;
   courseCode: string;
+  courseTitle: string;
   term: string;
   section: string;
   subSection: string;
@@ -13,6 +14,7 @@ interface ComponentResultProps {
 export const ComponentResult: React.FC<ComponentResultProps> = ({
   component,
   courseCode,
+  courseTitle,
   term,
   section,
   subSection,
@@ -26,7 +28,13 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
 
   useEffect(() => {
     if (isSelected) {
-      addSelectedComponent({ ...component, courseCode, term, subSection });
+      addSelectedComponent({
+        ...component,
+        courseCode,
+        courseTitle,
+        term,
+        subSection,
+      });
     } else {
       removeSelectedComponent(courseCode, term, subSection);
     }

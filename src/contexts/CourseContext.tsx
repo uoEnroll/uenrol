@@ -81,6 +81,7 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
           daysOfWeek: [dayOfWeekToNumberMap[session.dayOfWeek] as number],
           extendedProps: {
             courseCode: course.courseCode,
+            courseTitle: course.courseTitle,
             term: course.term,
             subSection: course.subSection,
             instructor: session.instructor,
