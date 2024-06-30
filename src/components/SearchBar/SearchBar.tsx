@@ -4,7 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import React, { ChangeEvent, useState } from "react";
 import TermSelector from "../TermSelector/TermSelector";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMagnifyingGlass,
+  faSpinner,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 
 async function fetchCourses(courseCode: string, term: Term | null) {
   if (!term) {
@@ -43,7 +47,6 @@ export default function SearchBar() {
     }
   }, [addCourse, data, isSuccess]);
 
-  if (isLoading) return <div>Loading...</div>;
   if (error) return <div>An error occurred: {error.message}</div>;
 
   function handleSearchClick() {
@@ -59,9 +62,10 @@ export default function SearchBar() {
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             setQuery(event.target.value.toUpperCase())
           }
-          className="border-slate-400 bg-slate-100 border text-xs w-full px-4 py-2 rounded-sm"
+          className="border-slate-400 bg-slate-100 border text-xs w-full px-4 py-2 rounded-sm disabled:bg-slate-300"
           type="text"
           placeholder="Course Code Eg. CSI 2101"
+          disabled={isLoading}
         />
 
         <button
@@ -73,12 +77,14 @@ export default function SearchBar() {
 
         <button
           onClick={handleSearchClick}
-          className="w-min bg-red-700 p-2 h-full rounded-sm text-white"
+          className="w-min bg-red-700 p-2 h-full rounded-sm text-white disabled:bg-opacity-40"
+          disabled={isLoading}
         >
-          <FontAwesomeIcon
-            className="h-4 aspect-square"
-            icon={faMagnifyingGlass}
-          />
+          {isLoading ? (
+            <FontAwesomeIcon className="size-4 animate-spin" icon={faSpinner} />
+          ) : (
+            <FontAwesomeIcon className="size-4" icon={faMagnifyingGlass} />
+          )}
         </button>
       </div>
     </div>
