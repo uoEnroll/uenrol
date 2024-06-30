@@ -9,6 +9,7 @@ import {
   faSpinner,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import toast from "react-hot-toast";
 
 async function fetchCourses(courseCode: string, term: Term | null) {
   if (!term) {
@@ -21,7 +22,7 @@ async function fetchCourses(courseCode: string, term: Term | null) {
   );
 
   if (!res.ok) {
-    throw new Error("Something went wrong");
+    throw new Error("Something went wrong. Please report this error.");
   }
   const data = await res.json();
   if (data.error) {
@@ -47,7 +48,9 @@ export default function SearchBar() {
     }
   }, [addCourse, data, isSuccess]);
 
-  if (error) return <div>An error occurred: {error.message}</div>;
+  if (error) {
+    toast.error(error.message);
+  }
 
   function handleSearchClick() {
     refetch();
