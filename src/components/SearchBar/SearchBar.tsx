@@ -29,7 +29,7 @@ async function fetchCourses(courseCode: string, term: Term | null) {
 export default function SearchBar() {
   const [query, setQuery] = useState("");
   const { term } = useCourses();
-  const { courses, addCourse } = useCourses();
+  const { courses, addCourse, resetCourses } = useCourses();
   const { data, error, isLoading, isSuccess, refetch } = useQuery<Course>({
     queryKey: ["courses", query, term],
     queryFn: () => fetchCourses(query, term),
@@ -64,7 +64,10 @@ export default function SearchBar() {
           placeholder="Course Code Eg. CSI 2101"
         />
 
-        <button className="w-min border-slate-400 border p-2 h-full rounded-sm text-black">
+        <button
+          onClick={resetCourses}
+          className="w-min border-slate-400 border p-2 h-full rounded-sm text-black"
+        >
           <FontAwesomeIcon className="h-4 aspect-square" icon={faTrash} />
         </button>
 

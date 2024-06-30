@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 interface CoursesContextType {
   courses: Course[];
   term: Term | null;
+  resetCourses: () => void;
   changeTerm: (term: Term) => void;
   addCourse: (course: Course) => void;
 }
@@ -30,13 +31,19 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
     });
   }
 
+  function resetCourses() {
+    setCourses([]);
+  }
+
   function changeTerm(term: Term) {
     setTerm(term);
     setCourses([]);
   }
 
   return (
-    <CoursesContext.Provider value={{ courses, addCourse, term, changeTerm }}>
+    <CoursesContext.Provider
+      value={{ courses, addCourse, resetCourses, term, changeTerm }}
+    >
       {children}
     </CoursesContext.Provider>
   );
