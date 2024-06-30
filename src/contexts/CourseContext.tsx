@@ -23,6 +23,15 @@ interface CoursesContextType {
 }
 
 const CoursesContext = createContext<CoursesContextType | undefined>(undefined);
+const dayOfWeekToNumberMap: { [key: string]: number } = {
+  Mo: 1,
+  Tu: 2,
+  We: 3,
+  Th: 4,
+  Fr: 5,
+  Sa: 6,
+  Su: 0,
+};
 
 export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -69,7 +78,7 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
           endTime: session.endTime,
           startRecur: session.startDate,
           endRecur: session.endDate,
-          daysOfWeek: [0],
+          daysOfWeek: [dayOfWeekToNumberMap[session.dayOfWeek] as number],
           extendedProps: {
             courseCode: course.courseCode,
             term: course.term,
