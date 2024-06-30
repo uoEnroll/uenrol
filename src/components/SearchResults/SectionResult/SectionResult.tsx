@@ -19,7 +19,7 @@ export const SectionResult: React.FC<SectionResultProps> = ({
         <span>Section {section.section}</span>
         <button onClick={() => setIsOpen((is) => !is)}>
           <Image
-            className={isOpen ? "-rotate-90" : "rotate-0"}
+            className={`transition-all ease-in delay-100 ${isOpen ? "-rotate-90" : "rotate-0"}`}
             width={24}
             height={24}
             src={"/chevron-left.svg"}
@@ -30,11 +30,12 @@ export const SectionResult: React.FC<SectionResultProps> = ({
 
       {section.components.map((component) => {
         return (
-          <ComponentResult
+          <div
+            className={`transition-all ease-in delay-100 ${isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"}`}
             key={`${partialKey}${section.section}${component.subSection}`}
-            partialKey={partialKey}
-            component={component}
-          />
+          >
+            <ComponentResult partialKey={partialKey} component={component} />
+          </div>
         );
       })}
     </div>
