@@ -1,4 +1,4 @@
-import { Course, SelectedCourse, Term } from "@/types/Types";
+import { Course, SelectedCourse, SelectedSession, Term } from "@/types/Types";
 import React, {
   createContext,
   useContext,
@@ -9,7 +9,7 @@ import React, {
 
 interface CoursesContextType {
   courses: Course[];
-  selectedCourses: SelectedCourse[];
+  selectedSessions: SelectedSession[];
   term: Term | null;
   resetCourses: () => void;
   changeTerm: (term: Term) => void;
@@ -28,7 +28,9 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [courses, setCourses] = useState<Course[]>([]);
-  const [selectedCourses, setSelectedCourses] = useState<SelectedCourse[]>([]);
+  const [selectedSessions, setSelectedSessions] = useState<SelectedSession[]>(
+    [],
+  );
   const [term, setTerm] = useState<Term | null>(null);
 
   const addCourse = useCallback((course: Course) => {
@@ -50,24 +52,32 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
   }, []);
 
   const addSelectedComponent = useCallback((course: SelectedCourse) => {
-    setSelectedCourses((currSelectedCourses) => {
+    setSelectedSessions((currSelectedComponents) => {
       if (
-        currSelectedCourses.some(
+        currSelectedComponents.some(
           (elem) =>
             elem.courseCode === course.courseCode &&
             elem.term === course.term &&
             elem.subSection == course.subSection,
         )
       ) {
-        return currSelectedCourses;
+        return currSelectedComponents;
       }
-      return [course, ...currSelectedCourses];
+      const sessions = course.sessions.map((session) => {
+        return {
+          ...session,
+          courseCode: course.courseCode,
+          term: course.term,
+          subSection: course.subSection,
+        };
+      });
+      return [...sessions, ...currSelectedComponents];
     });
   }, []);
 
   const removeSelectedComponent = useCallback(
     (courseCode: string, term: string, subSection: string) => {
-      setSelectedCourses((currSelectedCourses) => {
+      setSelectedSessions((currSelectedCourses) => {
         const filtered = currSelectedCourses.filter(
           (course) =>
             !(
@@ -85,7 +95,7 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
   const changeTerm = useCallback((term: Term) => {
     setTerm(term);
     setCourses([]);
-    setSelectedCourses([]);
+    setSelectedSessions([]);
   }, []);
 
   return (
@@ -94,7 +104,7 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
         courses,
         addCourse,
         resetCourses,
-        selectedCourses,
+        selectedSessions,
         addSelectedComponent,
         removeSelectedComponent,
         term,

@@ -36,3 +36,9 @@ export interface SelectedCourse extends Component {
   term: string;
   subSection: string;
 }
+
+export interface SelectedSession extends Session {
+  courseCode: string;
+  term: string;
+  subSection: string;
+}
