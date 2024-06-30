@@ -1,6 +1,7 @@
 import { Component } from "@/types/Types";
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { SessionResult } from "../SessionResult/SessionResult";
+import { useCourses } from "@/contexts/CourseContext";
 
 interface ComponentResultProps {
   component: Component;
@@ -16,16 +17,38 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
   section,
   subSection,
 }) => {
+  const { addSelectedCourse, removeSelectedCourse } = useCourses();
+  const [isSelected, setIsSelected] = useState(false);
+
+  function handleToggle() {
+    setIsSelected((is) => !is);
+  }
+
+  useEffect(() => {
+    if (isSelected) {
+      addSelectedCourse({ ...component, courseCode, term, subSection });
+    } else {
+      removeSelectedCourse(courseCode, term, subSection);
+    }
+  }, [
+    isSelected,
+    component,
+    courseCode,
+    subSection,
+    term,
+    addSelectedCourse,
+    removeSelectedCourse,
+  ]);
+
   return (
     <div className="flex items-center justify-between h-full w-full">
       <div className="px-2 h-full flex items-stretch">
-        <input type="checkbox" />
+        <input onChange={handleToggle} checked={isSelected} type="checkbox" />
       </div>
 
       <div className="w-full ml-4">
         {component.sessions.map((session) => (
           <SessionResult
-            key={`${partialKey}${session.startTime}`}
             key={`${courseCode}${term}${section}${subSection}${session.startTime}`}
             session={session}
           />
