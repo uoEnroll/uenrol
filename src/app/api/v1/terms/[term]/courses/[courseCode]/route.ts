@@ -4,7 +4,10 @@ export async function GET(req: Request, context: any) {
   const { params } = context;
 
   const termParam = params.term.trim();
-  const courseCodeParam = params.courseCode.trim().toUpperCase();
+  const courseCodeParam = params.courseCode
+    .trim()
+    .replaceAll(/ /g, "")
+    .toUpperCase();
 
   const res = await supabase.rpc("get_course", {
     termParam,
