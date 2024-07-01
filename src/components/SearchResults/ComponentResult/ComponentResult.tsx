@@ -1,7 +1,7 @@
 import { Component } from "@/types/Types";
 import React, { useEffect, useMemo, useState } from "react";
 import { SessionResult } from "../SessionResult/SessionResult";
-import { useCourses } from "@/contexts/CourseContext";
+import { useSearchResults } from "@/contexts/SearchResultsContext";
 
 interface ComponentResultProps {
   component: Component;
@@ -21,7 +21,7 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
   subSection,
   colour,
 }) => {
-  const { addSelectedComponent, removeSelectedComponent } = useCourses();
+  const { addSelectedComponent, removeSelectedComponent } = useSearchResults();
   const [isSelected, setIsSelected] = useState(false);
 
   function handleToggle() {

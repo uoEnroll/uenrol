@@ -5,7 +5,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import momentPlugin from "@fullcalendar/moment";
 import React from "react";
 import moment from "moment";
-import { useCourses } from "@/contexts/CourseContext";
+import { useSearchResults } from "@/contexts/SearchResultsContext";
 import { SelectedSession } from "@/types/Types";
 
 const TABELT_BREAKPOINT = 768;
@@ -16,7 +16,7 @@ export default function Calendar() {
   if (typeof window != "undefined") {
     initialWidth = window.innerWidth;
   }
-  const { selectedSessions } = useCourses();
+  const { selectedSessions } = useSearchResults();
 
   return (
     <FullCalendar

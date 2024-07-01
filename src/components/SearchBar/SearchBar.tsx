@@ -1,4 +1,4 @@
-import { useCourses } from "@/contexts/CourseContext";
+import { useSearchResults } from "@/contexts/SearchResultsContext";
 import { Course, Term } from "@/types/Types";
 import { useQuery } from "@tanstack/react-query";
 import React, { ChangeEvent, useCallback, useState } from "react";
@@ -41,8 +41,8 @@ async function fetchCourses(courseCode: string, term: Term | null) {
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");
-  const { term } = useCourses();
-  const { courses, addCourse, resetCourses } = useCourses();
+  const { term } = useSearchResults();
+  const { courses, addCourse, resetCourses } = useSearchResults();
   const { data, error, isLoading, isSuccess, refetch } = useQuery<Course>({
     queryKey: ["courses", query, term],
     queryFn: () => fetchCourses(query, term),

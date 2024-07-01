@@ -7,7 +7,7 @@ import React, {
   useCallback,
 } from "react";
 
-interface CoursesContextType {
+interface SearchResultsContextType {
   courses: Course[];
   selectedSessions: SelectedSession[];
   term: Term | null;
@@ -22,7 +22,9 @@ interface CoursesContextType {
   ) => void;
 }
 
-const CoursesContext = createContext<CoursesContextType | undefined>(undefined);
+const SearchResultsContext = createContext<
+  SearchResultsContextType | undefined
+>(undefined);
 const dayOfWeekToNumberMap: { [key: string]: number } = {
   Mo: 1,
   Tu: 2,
@@ -47,7 +49,7 @@ const availableColours = [
   "bg-yellow-200",
 ];
 
-export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
+export const SearchResultsProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -154,7 +156,7 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
   }, []);
 
   return (
-    <CoursesContext.Provider
+    <SearchResultsContext.Provider
       value={{
         courses,
         addCourse,
@@ -167,12 +169,12 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
       }}
     >
       {children}
-    </CoursesContext.Provider>
+    </SearchResultsContext.Provider>
   );
 };
 
-export const useCourses = (): CoursesContextType => {
-  const context = useContext(CoursesContext);
+export const useSearchResults = (): SearchResultsContextType => {
+  const context = useContext(SearchResultsContext);
   if (!context) {
     throw new Error("useCourses must be used within a CoursesProvider");
   }

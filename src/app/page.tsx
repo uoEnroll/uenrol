@@ -6,7 +6,7 @@ import Main from "@/layouts/Main/Main";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import Sidebar from "@/layouts/Sidebar/Sidebar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { CoursesProvider } from "@/contexts/CourseContext";
+import { SearchResultsProvider } from "@/contexts/SearchResultsContext";
 import SearchResults from "@/components/SearchResults/SearchResults";
 
 export default function Page() {
@@ -14,7 +14,7 @@ export default function Page() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CoursesProvider>
+      <SearchResultsProvider>
         <App>
           <Main>
             <Calendar />
@@ -25,7 +25,7 @@ export default function Page() {
             <SearchResults />
           </Sidebar>
         </App>
-      </CoursesProvider>
+      </SearchResultsProvider>
     </QueryClientProvider>
   );
 }
