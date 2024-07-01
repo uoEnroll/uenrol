@@ -50,6 +50,7 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
     term,
     addSelectedComponent,
     removeSelectedComponent,
+    colour,
   ]);
 
   return (
@@ -61,7 +62,7 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
       <div className="w-full ml-4 overflow-hidden flex flex-col gap-2">
         {component.sessions.map((session) => (
           <SessionResult
-            key={`${courseCode}${term}${section}${subSection}${session.dayOfWeek}${session.startTime}`}
+            key={`${courseCode}${term}${section}${subSection}${session.startDate}${session.dayOfWeek}${session.startTime}`}
             session={session}
           />
         ))}
