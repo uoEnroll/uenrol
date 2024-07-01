@@ -40,7 +40,7 @@ const CourseResult: React.FC<CourseResultProps> = ({ course }) => {
                 courseCode={course.courseCode}
                 term={course.term}
                 courseTitle={course.courseTitle}
-                colour={course.colour}
+                colour={course.colour as string}
                 section={section}
               />
             </div>
