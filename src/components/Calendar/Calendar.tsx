@@ -75,7 +75,9 @@ interface CalendarItemProps {
 }
 function CalendarItem(eventInfo: CalendarItemProps) {
   return (
-    <div className="flex flex-col gap-1 p-1 text-sm">
+    <div
+      className={`flex flex-col gap-1 text-sm h-full rounded-md p-1 ${eventInfo.event.extendedProps.backgroundColour}`}
+    >
       <div className="flex flex-wrap truncate">
         <span className="font-bold">
           {eventInfo.event.extendedProps.courseCode}

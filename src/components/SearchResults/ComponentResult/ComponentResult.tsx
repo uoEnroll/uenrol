@@ -10,6 +10,7 @@ interface ComponentResultProps {
   term: string;
   section: string;
   subSection: string;
+  colour: string;
 }
 export const ComponentResult: React.FC<ComponentResultProps> = ({
   component,
@@ -18,6 +19,7 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
   term,
   section,
   subSection,
+  colour,
 }) => {
   const { addSelectedComponent, removeSelectedComponent } = useCourses();
   const [isSelected, setIsSelected] = useState(false);
@@ -34,6 +36,7 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
         courseTitle,
         term,
         subSection,
+        colour,
       });
     } else {
       removeSelectedComponent(courseCode, term, subSection);

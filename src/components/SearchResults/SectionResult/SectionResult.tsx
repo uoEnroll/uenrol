@@ -10,12 +10,14 @@ interface SectionResultProps {
   courseCode: string;
   courseTitle: string;
   term: string;
+  colour: string;
 }
 export const SectionResult: React.FC<SectionResultProps> = ({
   section,
   courseCode,
   courseTitle,
   term,
+  colour,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -45,6 +47,7 @@ export const SectionResult: React.FC<SectionResultProps> = ({
               term={term}
               section={section.section}
               subSection={component.subSection}
+              colour={colour}
             />
           </div>
         );

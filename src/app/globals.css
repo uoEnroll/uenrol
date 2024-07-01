@@ -37,3 +37,7 @@
 .fc-event-main {
   @apply overflow-hidden !important;
 }
+
+.fc-event {
+  @apply bg-transparent border-0 !important;
+}

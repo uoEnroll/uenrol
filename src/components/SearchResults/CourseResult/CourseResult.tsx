@@ -17,7 +17,7 @@ const CourseResult: React.FC<CourseResultProps> = ({ course }) => {
       <div className="border rounded-md overflow-hidden">
         <div
           onClick={() => setIsOpen((is) => !is)}
-          className="hover:cursor-pointer p-2 bg-red-500"
+          className={`hover:cursor-pointer p-2 ${course.colour}`}
         >
           <div className="flex items-center justify-between">
             <div className="truncate">
@@ -40,6 +40,7 @@ const CourseResult: React.FC<CourseResultProps> = ({ course }) => {
                 courseCode={course.courseCode}
                 term={course.term}
                 courseTitle={course.courseTitle}
+                colour={course.colour}
                 section={section}
               />
             </div>

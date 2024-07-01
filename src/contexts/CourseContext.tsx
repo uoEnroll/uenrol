@@ -33,6 +33,20 @@ const dayOfWeekToNumberMap: { [key: string]: number } = {
   Su: 0,
 };
 
+const availableColours = [
+  "bg-red-300",
+  "bg-sky-300",
+  "bg-lime-200",
+  "bg-orange-500",
+  "bg-amber-400",
+  "bg-blue-500",
+  "bg-indigo-400",
+  "bg-pink-400",
+  "bg-violet-500",
+  "bg-emerald-500",
+  "bg-yellow-200",
+];
+
 export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
@@ -41,24 +55,44 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
     [],
   );
   const [term, setTerm] = useState<Term | null>(null);
+  const [chosenColours, setChosenColours] = useState<Set<string>>(
+    new Set<string>(),
+  );
 
-  const addCourse = useCallback((course: Course) => {
-    setCourses((currCourses) => {
-      if (
-        currCourses.some(
-          (elem) =>
-            elem.courseCode === course.courseCode && elem.term === course.term,
-        )
-      ) {
-        return currCourses;
-      }
-      return [course, ...currCourses];
-    });
-  }, []);
+  const selectRandomColour = useCallback(() => {
+    const filteredColours = availableColours.filter(
+      (colour) => !chosenColours.has(colour),
+    );
+    const randomIndex = Math.floor(Math.random() * filteredColours.length);
+    const chosenColour = filteredColours[randomIndex];
+    setChosenColours((prevSet) => new Set<string>(prevSet).add(chosenColour));
+    return chosenColour;
+  }, [chosenColours]);
+
+  const addCourse = useCallback(
+    (course: Course) => {
+      setCourses((currCourses) => {
+        if (
+          currCourses.some(
+            (elem) =>
+              elem.courseCode === course.courseCode &&
+              elem.term === course.term,
+          )
+        ) {
+          return currCourses;
+        }
+        const colour = selectRandomColour();
+        course.colour = colour;
+        return [course, ...currCourses];
+      });
+    },
+    [selectRandomColour],
+  );
 
   const resetCourses = useCallback(() => {
     setCourses([]);
     setSelectedSessions([]);
+    setChosenColours(new Set());
   }, []);
 
   const addSelectedComponent = useCallback((course: SelectedCourse) => {
@@ -81,6 +115,7 @@ export const CoursesProvider: React.FC<{ children: ReactNode }> = ({
           endRecur: session.endDate,
           daysOfWeek: [dayOfWeekToNumberMap[session.dayOfWeek] as number],
           extendedProps: {
+            backgroundColour: course.colour,
             courseCode: course.courseCode,
             courseTitle: course.courseTitle,
             term: course.term,

@@ -3,6 +3,7 @@ export interface Course {
   courseTitle: string;
   term: string;
   sections: Section[];
+  colour?: string;
 }
 
 export interface Section {
@@ -36,6 +37,7 @@ export interface SelectedCourse extends Component {
   courseTitle: string;
   term: string;
   subSection: string;
+  colour: string;
 }
 
 export interface SelectedSession {
@@ -52,5 +54,6 @@ export interface SelectedSession {
     instructor: string;
     type: string;
     isOpen: boolean;
+    backgroundColour: string;
   };
 }
