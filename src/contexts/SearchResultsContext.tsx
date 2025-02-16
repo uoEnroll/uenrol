@@ -111,11 +111,11 @@ export const SearchResultsProvider: React.FC<{ children: ReactNode }> = ({
       }
       const sessions = course.sessions.map((session) => {
         return {
-          startTime: session.startTime,
-          endTime: session.endTime,
+          startTime: session.startTime.slice(0, -3),
+          endTime: session.endTime.slice(0, -3),
           startRecur: session.startDate,
           endRecur: session.endDate,
-          daysOfWeek: [dayOfWeekToNumberMap[session.dayOfWeek] as number],
+          dayOfWeek: dayOfWeekToNumberMap[session.dayOfWeek] as number,
           extendedProps: {
             backgroundColour: course.colour,
             courseCode: course.courseCode,
