@@ -1,10 +1,10 @@
-import { useCourses } from "@/contexts/CourseContext";
+import { useSearchResults } from "@/contexts/SearchResultsContext";
 import React, { useState } from "react";
 import Image from "next/image";
 import CourseResult from "./CourseResult/CourseResult";
 
 export default function SearchResults() {
-  const { courses } = useCourses();
+  const { courses } = useSearchResults();
 
   return (
     <>

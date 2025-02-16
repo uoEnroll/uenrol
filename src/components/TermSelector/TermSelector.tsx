@@ -1,6 +1,6 @@
 "use client";
 
-import { useCourses } from "@/contexts/CourseContext";
+import { useSearchResults } from "@/contexts/SearchResultsContext";
 import { Term } from "@/types/Types";
 import { useQuery } from "@tanstack/react-query";
 import React, { ChangeEvent } from "react";
@@ -23,7 +23,7 @@ export default function TermSelector() {
       return data.data as Term[];
     },
   });
-  const { term, changeTerm } = useCourses();
+  const { term, changeTerm } = useSearchResults();
 
   React.useEffect(() => {
     if (data && data.length > 0 && !term) {

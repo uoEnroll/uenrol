@@ -45,7 +45,7 @@ export interface SelectedSession {
   endTime: string;
   startRecur: string;
   endRecur: string;
-  daysOfWeek: number[];
+  dayOfWeek: number;
   extendedProps: {
     courseCode: string;
     courseTitle: string;
