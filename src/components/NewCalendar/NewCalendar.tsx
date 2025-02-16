@@ -10,10 +10,15 @@ import { useSearchResults } from "@/contexts/SearchResultsContext";
 import dayjs from "dayjs";
 import { createEventRecurrencePlugin } from "@schedule-x/event-recurrence";
 import { datetime, RRule } from "rrule";
+import { createCalendarControlsPlugin } from "@schedule-x/calendar-controls";
 
 const DATE_FORMAT = "YYYY-MM-DD";
 function NewCalendar() {
-  const plugins = [createEventsServicePlugin(), createEventRecurrencePlugin()];
+  const plugins = [
+    createEventsServicePlugin(),
+    createEventRecurrencePlugin(),
+    createCalendarControlsPlugin(),
+  ];
   const { selectedSessions } = useSearchResults();
 
   const calendar = useNextCalendarApp(
@@ -25,6 +30,17 @@ function NewCalendar() {
   );
 
   useEffect(() => {
+    if (!calendar) {
+      return;
+    }
+
+    if (selectedSessions.length === 0) {
+      // Typescript doesn't pick up the additionaly fields but they exist
+      // @ts-expect-error
+      calendar.eventsService.set([]);
+      return;
+    }
+
     const events = selectedSessions.map((session) => {
       const startDate = dayjs(session.startRecur).add(
         session.dayOfWeek - 1,
@@ -56,8 +72,18 @@ function NewCalendar() {
       };
     });
 
-    calendar?.events.set(events);
-  }, [calendar?.events, selectedSessions]);
+    // Typescript doesn't pick up the additionaly fields but they exist
+    // @ts-expect-error
+    calendar.eventsService.set(events);
+
+    // HACK: This a temporary way to programatically refresh the calendar
+    // @ts-ignore
+    const currentView = calendar.calendarControls.getView();
+    // @ts-ignore
+    calendar.calendarControls.setView(currentView === "day" ? "week" : "day");
+    // @ts-ignore
+    calendar.calendarControls.setView(currentView === "day" ? "day" : "week");
+  }, [calendar, selectedSessions]);
 
   return (
     <div className="h-full overflow-scroll">
