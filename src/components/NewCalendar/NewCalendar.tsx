@@ -25,11 +25,7 @@ function NewCalendar() {
   );
 
   useEffect(() => {
-    calendar?.events.getAll().forEach((event) => {
-      calendar?.events.remove(event.id);
-    });
-
-    selectedSessions.forEach((session) => {
+    const events = selectedSessions.map((session) => {
       const startDate = dayjs(session.startRecur).add(
         session.dayOfWeek - 1,
         "day",
@@ -51,14 +47,16 @@ function NewCalendar() {
         ),
       });
 
-      calendar?.events.add({
+      return {
         id: `${session.extendedProps.courseCode}${session.extendedProps.subSection}`,
         title: `${session.extendedProps.courseCode}`,
         start: `${startDate.format(DATE_FORMAT)} ${session.startTime}`,
         end: `${startDate.format(DATE_FORMAT)} ${session.endTime}`,
         rrule: rrule.toString(),
-      });
+      };
     });
+
+    calendar?.events.set(events);
   }, [calendar?.events, selectedSessions]);
 
   return (
