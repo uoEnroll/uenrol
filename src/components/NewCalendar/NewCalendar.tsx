@@ -4,7 +4,7 @@ import { useNextCalendarApp, ScheduleXCalendar } from "@schedule-x/react";
 import { createViewDay, createViewWeek } from "@schedule-x/calendar";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
 
-import "@schedule-x/theme-default/dist/index.css";
+import "@schedule-x/theme-shadcn/dist/index.css";
 import { useEffect } from "react";
 import { useSearchResults } from "@/contexts/SearchResultsContext";
 import dayjs from "dayjs";
@@ -19,6 +19,7 @@ function NewCalendar() {
   const calendar = useNextCalendarApp(
     {
       views: [createViewDay(), createViewWeek()],
+      theme: "shadcn",
     },
     plugins,
   );

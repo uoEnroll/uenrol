@@ -41,3 +41,7 @@
 .fc-event {
   @apply bg-transparent border-0 !important;
 }
+
+:root {
+  --sx-color-primary: #8f001b !important;
+}
