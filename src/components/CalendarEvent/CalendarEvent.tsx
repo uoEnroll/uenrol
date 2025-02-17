@@ -19,7 +19,7 @@ export default function CalendarEvent({ calendarEvent }: props) {
   const end = dayjs(calendarEvent.end).format(TIME_FORMAT);
   return (
     <div
-      className={`absolute top-0 left-0 right-0 h-full p-2 rounded border border-white ${calendarEvent.className}`}
+      className={`absolute top-0 left-0 right-0 h-full p-2 rounded bg-opacity-60 border-l-4 ${calendarEvent.className}`}
     >
       <p className="font-bold text-xs mb-1">{calendarEvent.title}</p>
       <div className="flex items-center gap-2 font-light">
