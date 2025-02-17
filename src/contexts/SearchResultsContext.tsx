@@ -102,9 +102,9 @@ export const SearchResultsProvider: React.FC<{ children: ReactNode }> = ({
       if (
         currSelectedComponents.some(
           (elem) =>
-            elem.extendedProps.courseCode === course.courseCode &&
-            elem.extendedProps.term === course.term &&
-            elem.extendedProps.subSection == course.subSection,
+            elem.courseDetails.courseCode === course.courseCode &&
+            elem.courseDetails.term === course.term &&
+            elem.courseDetails.subSection == course.subSection,
         )
       ) {
         return currSelectedComponents;
@@ -116,7 +116,7 @@ export const SearchResultsProvider: React.FC<{ children: ReactNode }> = ({
           startRecur: session.startDate,
           endRecur: session.endDate,
           dayOfWeek: dayOfWeekToNumberMap[session.dayOfWeek] as number,
-          extendedProps: {
+          courseDetails: {
             backgroundColour: course.colour,
             courseCode: course.courseCode,
             courseTitle: course.courseTitle,
@@ -138,9 +138,9 @@ export const SearchResultsProvider: React.FC<{ children: ReactNode }> = ({
         const filtered = currSelectedCourses.filter(
           (course) =>
             !(
-              course.extendedProps.courseCode === courseCode &&
-              course.extendedProps.term === term &&
-              course.extendedProps.subSection === subSection
+              course.courseDetails.courseCode === courseCode &&
+              course.courseDetails.term === term &&
+              course.courseDetails.subSection === subSection
             ),
         );
         return filtered;

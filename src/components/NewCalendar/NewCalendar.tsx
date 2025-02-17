@@ -72,12 +72,12 @@ function NewCalendar() {
       });
 
       return {
-        id: `${session.extendedProps.courseCode}${session.extendedProps.subSection}`,
-        title: `${session.extendedProps.courseCode}`,
+        id: `${session.courseDetails.courseCode}${session.courseDetails.subSection}`,
+        title: `${session.courseDetails.courseCode}`,
         start: `${startDate.format(DATE_FORMAT)} ${session.startTime}`,
         end: `${startDate.format(DATE_FORMAT)} ${session.endTime}`,
         rrule: rrule.toString(),
-        className: session.extendedProps.backgroundColour,
+        ...session.courseDetails,
       };
     });
 
