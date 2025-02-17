@@ -36,17 +36,17 @@ const dayOfWeekToNumberMap: { [key: string]: number } = {
 };
 
 const availableColours = [
-  "bg-red-300",
-  "bg-sky-300",
-  "bg-lime-200",
-  "bg-orange-500",
-  "bg-amber-400",
-  "bg-blue-500",
-  "bg-indigo-400",
-  "bg-pink-400",
-  "bg-violet-500",
-  "bg-emerald-500",
-  "bg-yellow-200",
+  "bg-red-300 text-black",
+  "bg-sky-300 text-black",
+  "bg-lime-200 text-black",
+  "bg-yellow-200 text-black",
+  "bg-amber-400 text-black",
+  "bg-orange-500 text-white",
+  "bg-blue-500 text-white",
+  "bg-indigo-400 text-white",
+  "bg-pink-400 text-white",
+  "bg-violet-500 text-white",
+  "bg-emerald-500 text-white",
 ];
 
 export const SearchResultsProvider: React.FC<{ children: ReactNode }> = ({
