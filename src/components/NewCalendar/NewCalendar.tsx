@@ -77,7 +77,7 @@ function NewCalendar() {
         start: `${startDate.format(DATE_FORMAT)} ${session.startTime}`,
         end: `${startDate.format(DATE_FORMAT)} ${session.endTime}`,
         rrule: rrule.toString(),
-        className: session.courseDetails.backgroundColour,
+        ...session.courseDetails,
       };
     });
 
