@@ -11,6 +11,7 @@ import dayjs from "dayjs";
 import { createEventRecurrencePlugin } from "@schedule-x/event-recurrence";
 import { datetime, RRule } from "rrule";
 import { createCalendarControlsPlugin } from "@schedule-x/calendar-controls";
+import CalendarEvent from "../CalendarEvent/CalendarEvent";
 
 const DATE_FORMAT = "YYYY-MM-DD";
 function NewCalendar() {
@@ -69,6 +70,7 @@ function NewCalendar() {
         start: `${startDate.format(DATE_FORMAT)} ${session.startTime}`,
         end: `${startDate.format(DATE_FORMAT)} ${session.endTime}`,
         rrule: rrule.toString(),
+        className: session.extendedProps.backgroundColour,
       };
     });
 
@@ -87,7 +89,10 @@ function NewCalendar() {
 
   return (
     <div className="h-full overflow-scroll">
-      <ScheduleXCalendar calendarApp={calendar} />
+      <ScheduleXCalendar
+        calendarApp={calendar}
+        customComponents={{ timeGridEvent: CalendarEvent }}
+      />
     </div>
   );
 }
