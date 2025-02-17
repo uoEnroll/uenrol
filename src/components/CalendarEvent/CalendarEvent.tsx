@@ -11,12 +11,12 @@ type ExtendedCalendarEvent = {
   end: string;
 } & SelectedSession["courseDetails"];
 
-interface props {
+export interface CalendarEventProps {
   calendarEvent: ExtendedCalendarEvent;
 }
 
 const TIME_FORMAT = "hh:mm A";
-export default function CalendarEvent({ calendarEvent }: props) {
+export default function CalendarEvent({ calendarEvent }: CalendarEventProps) {
   const start = dayjs(calendarEvent.start).format(TIME_FORMAT);
   const end = dayjs(calendarEvent.end).format(TIME_FORMAT);
   return (

@@ -12,6 +12,8 @@ import { createEventRecurrencePlugin } from "@schedule-x/event-recurrence";
 import { datetime, RRule } from "rrule";
 import { createCalendarControlsPlugin } from "@schedule-x/calendar-controls";
 import CalendarEvent from "../CalendarEvent/CalendarEvent";
+import { createEventModalPlugin } from "@schedule-x/event-modal";
+import EventModal from "../EventModal/EventModal";
 
 const DATE_FORMAT = "YYYY-MM-DD";
 function NewCalendar() {
@@ -19,6 +21,7 @@ function NewCalendar() {
     createEventsServicePlugin(),
     createEventRecurrencePlugin(),
     createCalendarControlsPlugin(),
+    createEventModalPlugin(),
   ];
   const { selectedSessions } = useSearchResults();
 
@@ -98,7 +101,10 @@ function NewCalendar() {
     <div className="h-full overflow-scroll">
       <ScheduleXCalendar
         calendarApp={calendar}
-        customComponents={{ timeGridEvent: CalendarEvent }}
+        customComponents={{
+          timeGridEvent: CalendarEvent,
+          eventModal: EventModal,
+        }}
       />
     </div>
   );
