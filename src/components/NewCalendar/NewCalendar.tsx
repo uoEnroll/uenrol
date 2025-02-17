@@ -26,6 +26,13 @@ function NewCalendar() {
     {
       views: [createViewDay(), createViewWeek()],
       theme: "shadcn",
+      dayBoundaries: {
+        start: "06:00",
+        end: "23:00",
+      },
+      weekOptions: {
+        gridHeight: 1000,
+      },
     },
     plugins,
   );
