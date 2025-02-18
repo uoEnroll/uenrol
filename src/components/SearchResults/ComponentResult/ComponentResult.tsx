@@ -59,7 +59,9 @@ export const ComponentResult: React.FC<ComponentResultProps> = ({
         <input onChange={handleToggle} checked={isSelected} type="checkbox" />
       </div>
 
-      <div className="w-full ml-4 overflow-hidden flex flex-col gap-2 max-h-20 overflow-y-scroll">
+      <div
+        className={`w-full ml-4 overflow-hidden flex flex-col gap-2 max-h-20 overflow-y-scroll ${component.sessions.length === 1 ? "no-scrollbar" : ""}`}
+      >
         {component.sessions.map((session) => (
           <SessionResult
             key={`${courseCode}${term}${section}${subSection}${session.startDate}${session.dayOfWeek}${session.startTime}`}
