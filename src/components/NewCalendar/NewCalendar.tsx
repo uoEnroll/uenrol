@@ -5,24 +5,22 @@ import { createViewDay, createViewWeek } from "@schedule-x/calendar";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
 
 import "@schedule-x/theme-shadcn/dist/index.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchResults } from "@/contexts/SearchResultsContext";
 import dayjs from "dayjs";
 import { createEventRecurrencePlugin } from "@schedule-x/event-recurrence";
 import { datetime, RRule } from "rrule";
-import { createCalendarControlsPlugin } from "@schedule-x/calendar-controls";
 import CalendarEvent from "../CalendarEvent/CalendarEvent";
 import { createEventModalPlugin } from "@schedule-x/event-modal";
 import EventModal from "../EventModal/EventModal";
 
 const DATE_FORMAT = "YYYY-MM-DD";
 function NewCalendar() {
-  const plugins = [
-    createEventsServicePlugin(),
-    createEventRecurrencePlugin(),
-    createCalendarControlsPlugin(),
-    createEventModalPlugin(),
-  ];
+  const eventsService = useState(() => createEventsServicePlugin())[0];
+  const eventRecurrence = useState(() => createEventRecurrencePlugin())[0];
+  const eventModal = useState(() => createEventModalPlugin())[0];
+  const plugins = [eventsService, eventRecurrence, eventModal];
+
   const { selectedSessions } = useSearchResults();
 
   const calendar = useNextCalendarApp(
@@ -46,9 +44,7 @@ function NewCalendar() {
     }
 
     if (selectedSessions.length === 0) {
-      // Typescript doesn't pick up the additionaly fields but they exist
-      // @ts-expect-error
-      calendar.eventsService.set([]);
+      eventsService.set([]);
       return;
     }
 
@@ -84,18 +80,9 @@ function NewCalendar() {
       };
     });
 
-    // Typescript doesn't pick up the additionaly fields but they exist
-    // @ts-expect-error
-    calendar.eventsService.set(events);
-
-    // HACK: This a temporary way to programatically refresh the calendar
-    // @ts-ignore
-    const currentView = calendar.calendarControls.getView();
-    // @ts-ignore
-    calendar.calendarControls.setView(currentView === "day" ? "week" : "day");
-    // @ts-ignore
-    calendar.calendarControls.setView(currentView === "day" ? "day" : "week");
-  }, [calendar, selectedSessions]);
+    // Doesnt refresh calendar
+    eventsService.set(events);
+  }, [calendar, eventsService, selectedSessions]);
 
   return (
     <div className="h-full overflow-scroll">
