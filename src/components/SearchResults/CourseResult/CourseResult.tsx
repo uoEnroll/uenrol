@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { SectionResult } from "../SectionResult/SectionResult";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 interface CourseResultProps {
   course: Course;
@@ -25,8 +25,8 @@ const CourseResult: React.FC<CourseResultProps> = ({ course }) => {
             </div>
 
             <FontAwesomeIcon
-              className={`transition-all ease-in delay-100 ${isOpen ? "-rotate-90" : "rotate-0"}`}
-              icon={faChevronLeft}
+              className={`transition-all ease-in delay-100 ${isOpen ? "rotate-0" : "rotate-180"}`}
+              icon={faChevronUp}
             />
           </div>
         </div>

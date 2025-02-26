@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { ComponentResult } from "../ComponentResult/ComponentResult";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 interface SectionResultProps {
   section: Section;
@@ -29,8 +29,8 @@ export const SectionResult: React.FC<SectionResultProps> = ({
       >
         <span>Section {section.section}</span>
         <FontAwesomeIcon
-          className={`transition-all ease-in delay-100 ${isOpen ? "-rotate-90" : "rotate-0"}`}
-          icon={faChevronLeft}
+          className={`transition-all ease-in delay-100 ${isOpen ? "rotate-0" : "rotate-180"}`}
+          icon={faChevronUp}
         />
       </div>
 
