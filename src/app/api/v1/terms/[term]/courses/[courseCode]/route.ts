@@ -28,8 +28,8 @@ export async function GET(req: Request, context: any) {
   }
 
   const res = await supabase.rpc("get_course", {
-    termParam,
-    courseCodeParam,
+    term_param: termParam,
+    course_code_param: courseCodeParam,
   });
 
   if (!res.data) {

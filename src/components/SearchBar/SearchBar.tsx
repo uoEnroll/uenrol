@@ -15,7 +15,6 @@ async function fetchCourses(courseCode: string, term: Term | null) {
   if (!term) {
     throw new Error("No Term Selected");
   }
-  const selectedTerm = term.term.replace("/", "%2F");
 
   if (courseCode.length < 7) {
     throw new Error("Not a valid course code");
@@ -28,9 +27,7 @@ async function fetchCourses(courseCode: string, term: Term | null) {
     throw new Error("Not a valid course code");
   }
 
-  const res = await fetch(
-    `/api/v1/terms/${selectedTerm}/courses/${courseCode}`,
-  );
+  const res = await fetch(`/api/v1/terms/${term.value}/courses/${courseCode}`);
 
   const data = await res.json();
   if (data.error) {

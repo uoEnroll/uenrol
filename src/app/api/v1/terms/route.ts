@@ -1,12 +1,14 @@
 import supabase from "@/supabase/supabase";
 
 export async function GET() {
-  const res = await supabase.from("availableTerms").select("term,value");
+  const { data, error } = await supabase
+    .from("available_terms")
+    .select("term,value");
 
-  if (res.error) {
-    console.log(res.error.message);
+  if (error) {
+    console.log(error.message);
     return Response.json({ error: "Something went wrong", data: null });
   }
 
-  return Response.json({ error: null, data: res.data });
+  return Response.json({ error: null, data });
 }
